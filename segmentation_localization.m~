@@ -1,0 +1,24 @@
+function [boundingBox, orientatino, Idilated] = segmentation_localization(Ihoughlines)
+    % convert detected lines to binary
+    ibw = ~Ihoughlines(:,:,1);
+    ibw(ibw > 0) = true;
+    
+    % perform dilation using disk structuring element
+    disk_radius = 10;
+    se = strel("disk", disk_radius);
+    dilated_ibw = imdilate(ibw, se);
+    
+    % perform barcode localization
+    region_statistics = regionprops(dilated_ibw, "Orientation", "BoundingBox");
+    
+    % padding for the croped images
+    padding = 40; % 40 pixels of padding
+    bounding_box = zeros(length(region_statistics), 4);
+    
+    for i = 1:length(region_statistics)
+        bounding_box(i, :)
+    end
+    
+
+end
+
