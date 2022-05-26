@@ -32,6 +32,7 @@ forever = 1;
 [rows, columns] = size(ss);
 captured_image = zeros(rows, columns);
 roi = [x_min, y_min, width, height];
+
 while(forever)
     ss  = imread(url);
     stream = insertShape(ss,'rectangle', roi, ...
