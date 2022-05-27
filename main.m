@@ -35,9 +35,8 @@ roi = [x_min, y_min, width, height];
 
 while(forever)
     ss  = imread(url);
-    stream = insertShape(ss,'rectangle', roi, ...
-        'Color', {'green'}, 'Linewidth',5);
-    set(fh,'CData',stream);
+    detections = perform_detection(ss, 0);
+    set(fh, 'CData', detections);
     drawnow;
     
     isKeyPressed = ~isempty(get(h,'CurrentCharacter'));
