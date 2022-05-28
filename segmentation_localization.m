@@ -4,13 +4,13 @@ function [bounding_box, orientation, dilated_img] = segmentation_localization(Ih
     img(img > 0) = true;
     
     % perform dilation using disk structuring element
-    disk_radius = 10;
-    se = strel("disk", disk_radius);
+    disk_radius = 50;
+    se = strel("disk", disk_radius, 8);
     dilated_img = imdilate(img, se);
     
     % perform barcode localization
     region_statistics = regionprops(dilated_img, "Orientation", "BoundingBox");
-    
+
     % padding for the croped images
     padding = 40; % 40 pixels of padding
     bounding_box = zeros(length(region_statistics), 4);
@@ -26,6 +26,6 @@ function [bounding_box, orientation, dilated_img] = segmentation_localization(Ih
     end
     
     orientation = [region_statistics(:).Orientation];
-
+    
 end
 

@@ -59,3 +59,4 @@ axis on
 
 figure(3)
 imshow(I, [])
+
